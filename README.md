@@ -15,7 +15,7 @@ The contents of this repository are summarized below.
 * **PAWS_Features**: Contains the Android project for the test application that displays the raw features obtained from the PAWS/PAWS_LE headset.
 * **PAWS_Wireless_Latency**: Contains the Android project for the test application that measures the wireless latency between the PAWS/PAWS_LE headset using a button connected to the smartphone's audio jack.
 	
-To learn more about PAWS, please visit our [project page](icsl.ee.columbia.edu/projects/seus), or contact us at: [stephen.xia@columbia.edu](stephen.xia@columbia.edu). 	 
+To learn more about PAWS, please visit our [project page](http://icsl.ee.columbia.edu/projects/seus), or contact us at: [stephen.xia@columbia.edu](stephen.xia@columbia.edu). 	 
 	
 This repository is part of the **Pedestrian Audio Wearable System (PAWS)** project of the **Intelligent and Connected Systems Lab (ICSL)**, Columbia University.
-For more information about our latest projects, please visit our [group website](icsl.ee.columbia.edu).
+For more information about our latest projects, please visit our [group website](http://icsl.ee.columbia.edu).
