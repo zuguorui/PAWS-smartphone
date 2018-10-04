@@ -8,6 +8,8 @@ The smartphone application detects, localizes, and alerts users of oncoming cars
 
 Parts of this code was originally adapted from the Android-nRF-UART application version 2.0.1 from Nordic Semiconductor for BLE communication
 
+* Note: The PAWS project was at some point known as SEUS, which is why SEUS is used at some points rather than PAWS.
+
 # Installing this application on your phone
 
 There are two ways to install this application on your phone.

@@ -6,11 +6,13 @@ The PAWS LE system consists of this smartphone application and an embedded front
 
 The smartphone application detects, localizes, and alerts users of oncoming cars. Features used to localize cars are computed in the embedded front-end headset.
 
+Parts of this code was originally adapted from the Android-nRF-UART application version 2.0.1 from Nordic Semiconductor for BLE communication
+
+* Note: The PAWS project was at some point known as SEUS, which is why SEUS is used at some points rather than PAWS.
+
 # Differences from PAWS
 1. Angle estimation is done via AvPR, a regression-based method rather than an eight quadrant classifier
 2. Distance estimation is also done via regressing over the maximal cepstral coefficients rather than a classifier
-
-Parts of this code was originally adapted from the Android-nRF-UART application version 2.0.1 from Nordic Semiconductor for BLE communication
 
 # Installing this application on your phone
 

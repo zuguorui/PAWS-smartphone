@@ -4,6 +4,8 @@ This repository contains the code and necessary files to build and run the **Ped
 
 PAWS is a low-power connected system for improving pedestrian safety in current and future smart cities. PAWS uses microphones embedded into a headset combined with low-power feature extraction, signal processing, and machine learning, for detecting, localizing, and providing alerts of oncoming vehicles to pedestrians in noisy environments.
 
+* Note: The PAWS project was at some point known as SEUS, which is why SEUS is used at some points rather than PAWS.
+
 The contents of this repository are summarized below.
 
 * **PAWS**: Contains the source code and necessary files for the Pedestrian Audio Wearable System (PAWS) smartphone application.
