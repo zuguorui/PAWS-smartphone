@@ -19,6 +19,8 @@ There are two ways to install this application on your phone.
 1. Install the apk in **app\build\outputs**
 2. Install via Android Studio
 
+Once the application is installed, you must move the **../SEUS** folder into the **Downloads** folder of your phone before running the application.
+
 # Modifying and browsing the source code
 
 Create a new Android Studio project with the files in this folder.
