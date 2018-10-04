@@ -1,15 +1,20 @@
-# Android-nRF-UART
+# SEUS FEATURES
 
-nRF UART app can be used to connect to Bluetooth® Smart devices running a custom Nordic Semiconductor UART service. When connected, the app can send and receive ASCII and UTF-8 text strings. 
+This Android application can be used to connect to the PAWS/PAWS_LE headset to read and display raw features from the headset.
 
-This app works with the ble_app_uart project in the nRF51 SDK and the Bluetooth Smart SDK for Arduino. 
+This code was originally adapted from the Android-nRF-UART application version 2.0.1 from Nordic Semiconductor.
 
-This app created as a demonstration for handling 128 bit proprietary UUID service and characteristics. 
+# Installing this application on your phone
 
-The current version is 2.0.1 
+There are two ways to install this application on your phone.
 
-This source code can be compiled with Android Studio and Gradle. 
+1. Install the apk in **app\build\outputs**
+2. Install via Android Studio
+
+# Modifying and browsing the source code
+
+Create a new Android Studio project with the files in this folder.
 
 ### Note
-- Android 4.3 or later is required.
-- Android Studio supported 
+- Android 4.3 or later is required
+- Android Studio supported

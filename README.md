@@ -14,7 +14,20 @@ The contents of this repository are summarized below.
 	* SEUS: This folder contains the PAWS LE car detection and localization classifier models. To run the PAWS LE smartphone application, this folder must be placed into the *Downloads* folder of the smartphone.
 * **PAWS_Features**: Contains the Android project for the test application that displays the raw features obtained from the PAWS/PAWS_LE headset.
 * **PAWS_Wireless_Latency**: Contains the Android project for the test application that measures the wireless latency between the PAWS/PAWS_LE headset using a button connected to the smartphone's audio jack.
-	
+
+# Reproducing the PAWS system
+
+To reproduce the PAWS system, you must first install the PAWS smartphone application; details on how to do this can be found in the **PAWS/Application/** folder.
+
+Next, you must reproduce the PAWS front-end PCB. Details on how to do this can be found in the PAWS-FrontEnd repository.
+
+# Reproducing the PAWS LE System
+
+To reproduce the PAWS LE system, you must first install the PAWS LE smartphone application; details on how to do this can be found in the **PAWS_LE/Application/** folder.
+
+Next, you must reproduce the PAWS LE front-end PCB. Details on how to do this can be found in the PAWS-FrontEnd repository.
+
+# More About the PAWS Project
 To learn more about PAWS, please visit our [project page](http://icsl.ee.columbia.edu/projects/seus), or contact us at: [stephen.xia@columbia.edu](stephen.xia@columbia.edu). 	 
 	
 This repository is part of the **Pedestrian Audio Wearable System (PAWS)** project of the **Intelligent and Connected Systems Lab (ICSL)**, Columbia University.
