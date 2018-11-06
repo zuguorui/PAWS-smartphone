@@ -14,6 +14,21 @@
                     }
                 }
             ]
+        },
+        {
+            "outputFile": "C:\\violet\\ps\\seus_app\\SEUS_headset_0_1\\Application\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-port\\values-port.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\stephen\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.2.0.aar\\4315b7b9f519a146118c62eb179bb515\\res\\values-port\\values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
         }
     ]
 }

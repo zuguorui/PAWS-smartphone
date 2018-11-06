@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SEUS</string>
+    <string name="app_name">PAWS</string>
     <string name="real_time_detect">Real-Time Detection</string>
     <string name="detector_set">Detector Settings:</string>
     <string name="recorded_detect">Recorded Detection</string>

@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\violet\ps\seus_app\Code-20170219T230537Z\Code\App_plus_logging\app\src\main\jniLibs"/></dataSet><dataSet config="debug"><source path="C:\violet\ps\seus_app\Code-20170219T230537Z\Code\App_plus_logging\app\src\debug\jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\violet\ps\seus_app\SEUS_headset_0_1\Application\app\src\main\jniLibs"/></dataSet><dataSet config="debug"><source path="C:\violet\ps\seus_app\SEUS_headset_0_1\Application\app\src\debug\jniLibs"/></dataSet></merger>

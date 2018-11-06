@@ -11,7 +11,6 @@ package bashima.cs.unc.seus.Util;
  singular, so the constructor will never fail.  The primary use of the
  LU decomposition is in the solution of square systems of simultaneous
  linear equations.  This will fail if isNonsingular() returns false.
- Code from JAMA.
  */
 
 import bashima.cs.unc.seus.featuer.Matrix;

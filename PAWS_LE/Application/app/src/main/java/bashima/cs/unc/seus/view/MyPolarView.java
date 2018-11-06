@@ -1,26 +1,3 @@
-/*
- * MIT License
- *
- * Copyright (c) 2018, Stephen Xia, Columbia Intelligent and Connected Systems Lab (ICSL), Columbia University
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the “Software”), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */ 
 package bashima.cs.unc.seus.view;
 
 import android.content.Context;
@@ -152,18 +129,6 @@ public class MyPolarView extends View {
         canvas.drawArc(rectf, (int) (angle_to_draw - 22.5), 45, true, paint3);
         */
 
-        // Draw new point, just angle from the second localizesoundsource (localizesoundsource2)
-        /*paint3.setColor(Color.RED);
-
-        Log.d("Angle", String.valueOf(yPoint));
-        RectF rectf = new RectF(0, 0, width, height);
-
-        // Calculate angle to draw: Android 0 degrees starts at 3 o'clock and draws clockwise
-        double angle_to_draw = 360 - yPoint - 90;
-
-        canvas.drawArc(rectf, (int) (angle_to_draw - 22.5), 45, true, paint3); // Subtract 90 because 0 degree was computed to be in front of user, but the graph's 0 degree is to the right
-        */
-
         long timing = System.currentTimeMillis();
 
         //RectF rectf = new RectF(0, 0, width, height);
@@ -195,14 +160,14 @@ public class MyPolarView extends View {
             return;
         }
         double angle_to_draw = 360 - yPoint - 90;
-        //double distance = Math.min(Math.max(xPoint, 0), Constant.max_distance);
-        //double xCoordinate = Math.min(Math.max((xScale * distance * Math.cos(Math.PI * angle_to_draw / 180)) + x, 1), width - 1);
-        //double yCoordinate = Math.min(Math.max((yScale * distance * Math.sin(Math.PI * angle_to_draw / 180)) + y, 1), height - 1);
+        double distance = Math.min(Math.max(xPoint, 0), Constant.max_distance);
+        double xCoordinate = Math.min(Math.max((xScale * distance * Math.cos(Math.PI * angle_to_draw / 180)) + x, 1), width - 1);
+        double yCoordinate = Math.min(Math.max((yScale * distance * Math.sin(Math.PI * angle_to_draw / 180)) + y, 1), height - 1);
 
         paint = new Paint();
         paint.setColor(Color.RED);
-        canvas.drawArc(rectf, (int) (angle_to_draw - 22.5), 45, true, paint);
-        //canvas.drawCircle((float) xCoordinate, (float) yCoordinate, 20, paint);
+        //canvas.drawArc(rectf, (int) (angle_to_draw - 22.5), 45, true, paint);  // Draw just angle
+        canvas.drawCircle((float) xCoordinate, (float) yCoordinate, 20, paint);  // Draw location
 
         Log.d("UI Update Time", String.valueOf(System.currentTimeMillis() - timing));
 
@@ -238,6 +203,9 @@ public class MyPolarView extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(3);
         canvas.drawCircle((float) xCoordinate, (float) yCoordinate, 20, paint);*/
+
+        // Localizesoundsource2 draw point
+
     }
 
     @Override

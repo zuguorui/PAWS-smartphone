@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
         menu.setDisplayUseLogoEnabled(true);
 
         //UI
-        myPlotView = (MyPlotView) findViewById(R.id.plotviewid);
+        //myPlotView = (MyPlotView) findViewById(R.id.plotviewid);
         mpv = (MyPolarView) findViewById(R.id.polarviewid);
         tvDeviceName = (TextView) findViewById(R.id.tv_connected_device);
 
@@ -590,7 +590,7 @@ public class MainActivity extends AppCompatActivity {
 
                                     @Override
                                     public void run() {
-                                        updatePlotView(audioPlotValue);
+                                        //updatePlotView(audioPlotValue);
                                     }
                                 });
                             }
@@ -687,7 +687,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void run() {
-                                updatePlotView(audioPlotValue);
+                                //updatePlotView(audioPlotValue);
                             }
                         });
                     }

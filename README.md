@@ -23,11 +23,19 @@ To reproduce the PAWS system, you must first install the PAWS smartphone applica
 
 Next, you must reproduce the PAWS front-end PCB. Details on how to do this can be found in the PAWS-FrontEnd repository.
 
+# Using the PAWS Smartphone Application
+
+A manual detailing how to use the smartphone application can be found in **PAWS/PAWS_Manual.pdf**. This file details basic app usage and how to train your own car detection models.
+
 # Reproducing the PAWS LE System
 
 To reproduce the PAWS LE system, you must first install the PAWS LE smartphone application; details on how to do this can be found in the **PAWS_LE/Application/** folder.
 
-Next, you must reproduce the PAWS LE front-end PCB. Details on how to do this can be found in the PAWS-FrontEnd repository.
+Next, you must reproduce the PAWS LE front-end PCB. Details on how to do this can be found in the [PAWS-FrontEnd repository](https://github.com/Columbia-ICSL/PAWS-FrontEnd).
+
+# Using the PAWS Smartphone Application
+
+A manual detailing how to use the smartphone application can be found in **PAWS_LE/PAWSLE_Manual.pdf**. This file details basic app usage and how to train your own car detection models.
 
 # More About the PAWS Project
 To learn more about PAWS, please visit our [project page](http://icsl.ee.columbia.edu/projects/seus), or contact us at: [stephen.xia@columbia.edu](stephen.xia@columbia.edu). 	 

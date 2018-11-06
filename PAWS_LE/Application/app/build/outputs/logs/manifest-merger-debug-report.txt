@@ -82,7 +82,7 @@ MERGED from [com.android.support:support-compat:24.2.0] C:\Users\stephen\.gradle
 	android:supportsRtl
 		ADDED from C:\violet\ps\seus_app\SEUS_headset_0_2\app\App_plus_logging\app\src\main\AndroidManifest.xml:17:9-35
 	android:label
-		ADDED from C:\violet\ps\seus_app\SEUS_headset_0_2\app\App_plus_logging\app\src\main\AndroidManifest.xml:16:9-41
+		ADDED from C:\violet\ps\seus_app\SEUS_headset_0_2\app\App_plus_logging\app\src\main\AndroidManifest.xml:16:9-29
 	android:icon
 		ADDED from C:\violet\ps\seus_app\SEUS_headset_0_2\app\App_plus_logging\app\src\main\AndroidManifest.xml:15:9-43
 	android:allowBackup

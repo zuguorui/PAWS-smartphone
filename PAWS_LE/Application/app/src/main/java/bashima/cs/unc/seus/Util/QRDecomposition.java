@@ -11,7 +11,6 @@ package bashima.cs.unc.seus.Util;
  QR decomposition is in the least squares solution of nonsquare systems
  of simultaneous linear equations.  This will fail if isFullRank()
  returns false.
- Code from JAMA.
  */
 
 import bashima.cs.unc.seus.featuer.Matrix;
