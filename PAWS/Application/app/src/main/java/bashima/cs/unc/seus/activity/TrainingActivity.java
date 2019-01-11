@@ -71,6 +71,7 @@ public class TrainingActivity extends AppCompatActivity {
     Button btTrain;
     Button btFeature;
     Button btTrainDir;
+    Button btTrainDist;
     Button btConvert;
     Button btTest;
     Button btDirTest;
@@ -117,6 +118,17 @@ public class TrainingActivity extends AppCompatActivity {
                 //trainCarDistModel();
                 //trainHornDistModel();
                 Toast.makeText(context, "Direction Calculated", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        btTrainDist = (Button) findViewById(R.id.bt_train_dist);
+        btTrainDist.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                trainCarDistModel();
+                //trainHornDirModel();
+                //trainCarDistModel();
+                //trainHornDistModel();
+                Toast.makeText(context, "Distance Calculated", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -462,7 +474,7 @@ public class TrainingActivity extends AppCompatActivity {
             br = new BufferedReader(new FileReader(Constant.FILE_PATH + Constant.FOLDER_NAME + "carWeka.csv"));
             while ((line = br.readLine()) != null) {
 
-                // Stephen: Only use two ccrs (mic1 - mic2 and mic1 - mic3)
+                // Stephen: Only use ccrs
                 int num_features = 3;
                 double[] value = new double[num_features];
                 // use comma as separator

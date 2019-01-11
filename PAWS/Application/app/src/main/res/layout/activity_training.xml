@@ -12,12 +12,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/trainDet"
-        android:id="@+id/bt_train"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
+        android:text="Calculate Features"
+        android:id="@+id/bt_calculate_feature"
+        android:layout_above="@+id/bt_train"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
         android:textColor="#000080"
         android:textStyle="bold"
         android:layout_alignParentEnd="true" />
@@ -25,35 +23,42 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Calculate Features"
-        android:id="@+id/bt_calculate_feature"
-        android:layout_above="@+id/bt_train"
-        android:layout_alignRight="@+id/bt_train"
-        android:layout_alignEnd="@+id/bt_train"
-        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/bt_train_dir"
+        android:text="@string/trainDet"
+        android:id="@+id/bt_train"
+        android:layout_alignParentStart="true"
         android:textColor="#000080"
         android:textStyle="bold"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:text="@string/trainDir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_train"
+        android:layout_above="@+id/bt_train_dist"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="8dp"
         android:textColor="#000080"
         android:textStyle="bold"
         android:id="@+id/bt_train_dir"
         android:layout_alignParentEnd="true" />
 
     <Button
+        android:text="@string/trainDist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_convert"
+        android:layout_alignParentStart="true"
+        android:textColor="#000080"
+        android:textStyle="bold"
+        android:id="@+id/bt_train_dist"
+        android:layout_alignParentEnd="true" />
+
+    <Button
         android:text="Convert Features to Readable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_train_dir"
+        android:layout_above="@+id/bt_test"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="8dp"
         android:textColor="#000080"
         android:textStyle="bold"
         android:id="@+id/bt_convert"
@@ -63,9 +68,8 @@
         android:text="Test Detection Classifier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_convert"
+        android:layout_above="@+id/bt_dir_test"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="8dp"
         android:textColor="#000080"
         android:textStyle="bold"
         android:id="@+id/bt_test"
@@ -75,17 +79,17 @@
         android:text="Test Direction Classifier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_test"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="8dp"
         android:textColor="#000080"
         android:textStyle="bold"
         android:id="@+id/bt_dir_test"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_calculate_feature"
         android:layout_marginTop="57dp"
         android:textColor="#000080"
         android:id="@+id/tv_status"

@@ -1,0 +1,27 @@
+#Internal package file, do not edit.
+#Thu Jan 10 18:41:04 EST 2019
+2.base=C\:\\violet\\ps\\seus_app\\SEUS_headset_0_1\\Application\\app\\build\\intermediates\\assets\\debug
+5.set=ASSET
+0.path=hornDirModel.ser
+2.baseType=DIRECTORY
+3.base=C\:\\violet\\ps\\seus_app\\SEUS_headset_0_1\\Application\\app\\build\\intermediates\\assets\\debug
+2.set=ASSET
+1.path=classes.dex
+4.base=C\:\\violet\\ps\\seus_app\\SEUS_headset_0_1\\Application\\app\\build\\intermediates\\assets\\debug
+count=6
+5.baseType=DIRECTORY
+2.path=carDistModel.ser
+5.base=C\:\\violet\\ps\\seus_app\\SEUS_headset_0_1\\Application\\app\\build\\intermediates\\assets\\debug
+4.set=ASSET
+3.path=model.ser
+3.baseType=DIRECTORY
+1.set=DEX
+4.path=carDirModel.ser
+1.baseType=DIRECTORY
+5.path=hornDistModel.ser
+0.base=C\:\\violet\\ps\\seus_app\\SEUS_headset_0_1\\Application\\app\\build\\intermediates\\assets\\debug
+0.baseType=DIRECTORY
+3.set=ASSET
+1.base=C\:\\violet\\ps\\seus_app\\SEUS_headset_0_1\\Application\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+4.baseType=DIRECTORY
+0.set=ASSET

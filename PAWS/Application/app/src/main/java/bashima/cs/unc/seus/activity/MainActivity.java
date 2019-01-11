@@ -590,7 +590,7 @@ public class MainActivity extends AppCompatActivity {
 
                                     @Override
                                     public void run() {
-                                        //updatePlotView(audioPlotValue);
+                                        updatePlotView(audioPlotValue);
                                     }
                                 });
                             }
@@ -687,7 +687,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void run() {
-                                //updatePlotView(audioPlotValue);
+                                updatePlotView(audioPlotValue);
                             }
                         });
                     }
@@ -743,7 +743,7 @@ public class MainActivity extends AppCompatActivity {
                         Object predictedClassValue = Constant.classifierDetection.classify(instance);
                         Log.e("Predicted Value", predictedClassValue.toString());
                         //predictedClassValue = Constant.CAR_CLASS;
-                        if (predictedClassValue.equals(CAR_CLASS) || true) {
+                        if (predictedClassValue.equals(CAR_CLASS)) {
 
                             carPredict++;
                             if (carPredict > 3) {
@@ -756,7 +756,7 @@ public class MainActivity extends AppCompatActivity {
                                 distance = 1;
                             }
 
-                            if (isConnected                     && btDataArrayList.size() > 0) {
+                            if (isConnected && btDataArrayList.size() > 0) {
 //                                int quard = 0;
 //                                int []train = new int[8];
 //                                for(int i= 0; i<20; i++) {
@@ -1003,11 +1003,11 @@ public class MainActivity extends AppCompatActivity {
     void updatePlotView(double val) {
         mpv.whichPie = quardrant;
         mpv.distance = distance;
-        myPlotView.insertPoint(val, detected, distance);
+        //myPlotView.insertPoint(val, detected, distance);
         Handler h = new Handler(Looper.getMainLooper());
         h.post(new Runnable() {
             public void run() {
-                myPlotView.invalidate();
+                //myPlotView.invalidate();
                 mpv.invalidate();
             }
         });

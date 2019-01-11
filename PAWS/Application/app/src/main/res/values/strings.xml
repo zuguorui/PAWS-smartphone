@@ -12,6 +12,7 @@
     <string name="train">Train Classifier</string>
     <string name="trainDet">Train Detection Classifier</string>
     <string name="trainDir">Train Direction Classifier</string>
+    <string name="trainDist">Train Distance Classifier</string>
     <string name="device">Device:</string>
     <string name="no_device">&lt;Select a device&gt;</string>
     <string name="select_device">Select a device</string>
