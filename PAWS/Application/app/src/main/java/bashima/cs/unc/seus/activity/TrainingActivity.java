@@ -23,8 +23,11 @@
  */
 package bashima.cs.unc.seus.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -60,6 +63,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bashima.cs.unc.seus.constant.Constant;
+import bashima.cs.unc.seus.dialog.TrainProgressDialog;
 import bashima.cs.unc.seus.featuer.GenericCC;
 import bashima.cs.unc.seus.featuer.MFCCFeatureExtract;
 import bashima.cs.unc.seus.featuer.WindowFeature;
@@ -94,6 +98,40 @@ public class TrainingActivity extends AppCompatActivity {
 
     private static final String TAG = "TrainingActivity";
     private static final String genericCCFolderName = "GenericCC/";
+
+    private Thread trainThread = null;
+    private TrainProgressDialog progressDialog;
+    private static final int MSG_PROGRESS_UPDATE = 0;
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what)
+            {
+                case MSG_PROGRESS_UPDATE:
+                {
+                    if(progressDialog == null)
+                    {
+                        return;
+                    }
+                    String message = (String)msg.obj;
+                    progressDialog.setContent(message);
+                    progressDialog.setTitle("正在训练");
+                    if(msg.arg1 == 1 && trainThread != null)
+                    {
+                        trainThread.interrupt();
+                        trainThread = null;
+
+                        progressDialog.dismiss();
+                    }
+                }
+                break;
+                default:
+                    break;
+            }
+        }
+    };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +190,7 @@ public class TrainingActivity extends AppCompatActivity {
 //                    Log.e("Output", "MFCC Calculated for " + Constant.a);
 //                }
                 //mfccCalcutation();
-                genericCC_features = new GenericCC(Constant.SAMPLE_RATE, Constant.Wl, Constant.Ts, Constant.n_frames_per_window, Constant.B_GCC, Constant.a_GCC, Constant.b_GCC);
+
                 generateGCCFeaturesFromDataset();
             }
         });
@@ -190,6 +228,9 @@ public class TrainingActivity extends AppCompatActivity {
         // Detection Classifier
         //libSVM = new LibSVM();
         randomForestDetection = new RandomForest(50);
+
+        progressDialog = new TrainProgressDialog();
+        progressDialog.setCancelable(false);
     }
 
     public void mfccCalcutation() {
@@ -846,39 +887,117 @@ public class TrainingActivity extends AppCompatActivity {
 
     private void generateGCCFeaturesFromDataset()
     {
-        File folder = new File(Constant.FILE_PATH, Constant.FOLDER_NAME + "Audio/");
-        int count = 0;
 
-        tvStatus.setText("Generating Features from .wav Files....");
-        for (final File fileEntry : folder.listFiles()) {
-            if (fileEntry.isDirectory()) {
-            } else {
-                String fileName = fileEntry.getName();
-                String extension = "";
-                int pos = fileName.lastIndexOf(".");
-                if (pos > 0) {
-                    extension = fileName.substring(pos + 1);
-                    fileName = fileName.substring(0, pos);
+        if(trainThread != null)
+        {
+            return;
+        }
 
+        Runnable generateGCCFeaturesFromDataSetRunnable = new Runnable() {
+            @Override
+            public void run() {
+
+                Message message;
+
+                File folder = new File(Constant.FILE_PATH, Constant.FOLDER_NAME + "Audio/");
+                int count = 0;
+
+                File[] files = folder.listFiles();
+                if(files == null || files.length == 0)
+                {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(TrainingActivity.this, "目标文件夹中没有文件", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return;
                 }
 
-                // Generate features from all .wav files in Audio/ and count the number of examples successfully generated.
-                if (extension.equals("wav")) {
-                    File newFile = new File(fileName + "_1.txt");
-                    if (newFile.exists()) {
-                        Log.d(TAG, fileName + "_1.txt already exists; skipping.");
-                    } else {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.show(getFragmentManager(), null);
+                    }
+                });
 
-                        // Generate and save features; count number of files where at least one example was generated
-                        if(genericCCFeaturesFromFile(fileEntry.getName())) {
-                            count = count + 1;
+                message = new Message();
+                message.what = MSG_PROGRESS_UPDATE;
+                message.obj = "开始建立参数";
+                message.arg1 = 0;
+                mHandler.sendMessage(message);
+                genericCC_features = new GenericCC(Constant.SAMPLE_RATE, Constant.Wl, Constant.Ts, Constant.n_frames_per_window, Constant.B_GCC, Constant.a_GCC, Constant.b_GCC);
+
+                try{
+                    Thread.sleep(2000);
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvStatus.setText("Generating Features from .wav Files....");
+                    }
+                });
+
+                int index = 0;
+                for (final File fileEntry : files) {
+
+                    if (fileEntry.isDirectory()) {
+                    } else {
+                        message = new Message();
+                        message.what = MSG_PROGRESS_UPDATE;
+                        message.obj = String.format("正在训练第%d个文件，共%d个", index, files.length);
+                        message.arg1 = 0;
+                        mHandler.sendMessage(message);
+                        index++;
+
+                        String fileName = fileEntry.getName();
+                        String extension = "";
+                        int pos = fileName.lastIndexOf(".");
+                        if (pos > 0) {
+                            extension = fileName.substring(pos + 1);
+                            fileName = fileName.substring(0, pos);
+
+                        }
+
+                        // Generate features from all .wav files in Audio/ and count the number of examples successfully generated.
+                        if (extension.equals("wav")) {
+                            File newFile = new File(fileName + "_1.txt");
+                            if (newFile.exists()) {
+                                Log.d(TAG, fileName + "_1.txt already exists; skipping.");
+                            } else {
+
+                                // Generate and save features; count number of files where at least one example was generated
+                                if(genericCCFeaturesFromFile(fileEntry.getName())) {
+                                    count = count + 1;
+                                }
+                            }
                         }
                     }
                 }
-            }
-        }
 
-        tvStatus.setText("Files processed for GenericCC features: " + String.valueOf(count));
+                final int mCount = count;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvStatus.setText("Files processed for GenericCC features: " + String.valueOf(mCount));
+                    }
+                });
+
+                message = new Message();
+                message.what = MSG_PROGRESS_UPDATE;
+                message.arg1 = 1;
+                message.obj = "训练完毕";
+                mHandler.sendMessage(message);
+            }
+        };
+
+        trainThread = new Thread(generateGCCFeaturesFromDataSetRunnable);
+        trainThread.start();
     }
 
     /**
@@ -994,75 +1113,143 @@ public class TrainingActivity extends AppCompatActivity {
      * Trains the Detection model using Generic CC features generated and stored in .txt files in the GenericCC folder.
      */
     private void trainGCCModel() {
-        File folder = new File(Constant.FILE_PATH, Constant.FOLDER_NAME + genericCCFolderName);
-        int count = 0;
 
-        // Collecting features from files to generate model
-        tvStatus.setText("Building Detection Model....");
-        for (final File fileEntry : folder.listFiles()) {
-            if (fileEntry.isDirectory()) {
-            } else {
-                String fileName = fileEntry.getName();
-                String extension = "";
-                int pos = fileName.lastIndexOf(".");
-                if (pos > 0) {
-                    extension = fileName.substring(pos + 1);
+        if(trainThread != null)
+        {
+            return;
+        }
+        Runnable trainGCCModelRunnable = new Runnable() {
+            @Override
+            public void run() {
+                Message message;
+
+                File folder = new File(Constant.FILE_PATH, Constant.FOLDER_NAME + genericCCFolderName);
+                int count = 0;
+
+                File[] files = folder.listFiles();
+                if(files == null || files.length == 0)
+                {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(TrainingActivity.this, "目标文件夹中没有文件", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return;
                 }
 
-                // Process txt files only
-                if (extension.equals("txt")) {
-                    try {
-                        FileInputStream fin = new FileInputStream(fileEntry);
-                        ObjectInputStream ois = new ObjectInputStream(fin);
-                        double[] feature = (double[]) ois.readObject();
-                        ois.close();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.show(getFragmentManager(), null);
+                    }
+                });
 
-                        Log.d(TAG, "GCC Features: " + doubleToString(feature));
+                // Collecting features from files to generate model
+                int index = 1;
+                int fileCount = files.length;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvStatus.setText("Building Detection Model....");
+                    }
+                });
 
-                        // Class name determined by the label of the text file.
-                        String className = "";
-                        if (fileName.contains("car")) {
-                            className = Constant.CAR_CLASS;
-                        } else if (fileName.contains("horn")) {
-                            className = Constant.HORN_CLASS;
-                        } else {
-                            className = Constant.NONE_CLASS;
+                for (final File fileEntry : files) {
+                    if (fileEntry.isDirectory()) {
+                    } else {
+                        message = new Message();
+                        message.what = MSG_PROGRESS_UPDATE;
+                        message.obj = String.format("正在训练第%d个文件，共%d个", index, fileCount);
+                        message.arg1 = 0;
+                        mHandler.sendMessage(message);
+                        index++;
+
+                        String fileName = fileEntry.getName();
+                        String extension = "";
+                        int pos = fileName.lastIndexOf(".");
+                        if (pos > 0) {
+                            extension = fileName.substring(pos + 1);
                         }
-                        Instance instance = new DenseInstance(feature, className);
-                        data.add(instance);
-                        Log.d(TAG, "Feature: " + doubleToString(feature));
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                        Log.e(TAG, "Could not open file: " + fileEntry.getName());
+
+                        // Process txt files only
+                        if (extension.equals("txt")) {
+                            try {
+                                FileInputStream fin = new FileInputStream(fileEntry);
+                                ObjectInputStream ois = new ObjectInputStream(fin);
+                                double[] feature = (double[]) ois.readObject();
+                                ois.close();
+
+                                Log.d(TAG, "GCC Features: " + doubleToString(feature));
+
+                                // Class name determined by the label of the text file.
+                                String className = "";
+                                if (fileName.contains("car")) {
+                                    className = Constant.CAR_CLASS;
+                                } else if (fileName.contains("horn")) {
+                                    className = Constant.HORN_CLASS;
+                                } else {
+                                    className = Constant.NONE_CLASS;
+                                }
+                                Instance instance = new DenseInstance(feature, className);
+                                data.add(instance);
+                                Log.d(TAG, "Feature: " + doubleToString(feature));
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                                Log.e(TAG, "Could not open file: " + fileEntry.getName());
+                            }
+                        }
                     }
                 }
+
+                message = new Message();
+                message.what = MSG_PROGRESS_UPDATE;
+                message.arg1 = 0;
+                message.obj = String.format("正在建立模型");
+                mHandler.sendMessage(message);
+
+                // Build and Save Classifier
+                Log.d(TAG, "Building detection classifier");
+                //libSVM.buildClassifier(data);
+                randomForestDetection.buildClassifier(data);
+                Log.d(TAG, "Done building detection classifier");
+                FileOutputStream fout = null;
+                try {
+                    Log.d(TAG, "Saving detection classifier");
+                    fout = new FileOutputStream(Constant.FILE_PATH + Constant.FOLDER_NAME + modelName);
+                    ObjectOutputStream oos = new ObjectOutputStream(fout);
+                    //oos.writeObject(libSVM);
+                    oos.writeObject(randomForestDetection);
+                    oos.close();
+                    Log.d(TAG, "Done saving detection classifier");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "Could not find file: " + Constant.FILE_PATH + Constant.FOLDER_NAME + modelName);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "Could not access file: " + Constant.FILE_PATH + Constant.FOLDER_NAME + modelName);
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvStatus.setText("Detection Model Built With " + String.valueOf(data.size()) + " Examples");
+                        Toast.makeText(context, "Detection Model Built", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                message = new Message();
+                message.what = MSG_PROGRESS_UPDATE;
+                message.arg1 = 1;
+                message.obj = "训练完毕";
+                mHandler.sendMessage(message);
+
             }
-        }
+        };
 
-        // Build and Save Classifier
-        Log.d(TAG, "Building detection classifier");
-        //libSVM.buildClassifier(data);
-        randomForestDetection.buildClassifier(data);
-        Log.d(TAG, "Done building detection classifier");
-        FileOutputStream fout = null;
-        try {
-            Log.d(TAG, "Saving detection classifier");
-            fout = new FileOutputStream(Constant.FILE_PATH + Constant.FOLDER_NAME + modelName);
-            ObjectOutputStream oos = new ObjectOutputStream(fout);
-            //oos.writeObject(libSVM);
-            oos.writeObject(randomForestDetection);
-            oos.close();
-            Log.d(TAG, "Done saving detection classifier");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            Log.e(TAG, "Could not find file: " + Constant.FILE_PATH + Constant.FOLDER_NAME + modelName);
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e(TAG, "Could not access file: " + Constant.FILE_PATH + Constant.FOLDER_NAME + modelName);
-        }
+        trainThread = new Thread(trainGCCModelRunnable);
+        trainThread.start();
 
-        tvStatus.setText("Detection Model Built With " + String.valueOf(data.size()) + " Examples");
-        Toast.makeText(context, "Detection Model Built", Toast.LENGTH_LONG).show();
     }
 
     /**

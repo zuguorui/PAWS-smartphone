@@ -4,5 +4,7 @@
 /.idea/dictionaries/*.xml
 /.idea/libraries
 .DS_Store
-/build
+./**/build
+app/build
 /key*
+
