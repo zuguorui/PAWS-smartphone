@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Application.iml" filepath="$PROJECT_DIR$/Application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Jama-1.0.2/Application.Jama-1.0.2.iml" filepath="$PROJECT_DIR$/.idea/modules/Jama-1.0.2/Application.Jama-1.0.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ajt-2.9/Application.ajt-2.9.iml" filepath="$PROJECT_DIR$/.idea/modules/ajt-2.9/Application.ajt-2.9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Application.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Application.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/commons-math-1.2/Application.commons-math-1.2.iml" filepath="$PROJECT_DIR$/.idea/modules/commons-math-1.2/Application.commons-math-1.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/javaml/Application.javaml.iml" filepath="$PROJECT_DIR$/.idea/modules/javaml/Application.javaml.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libsvm/Application.libsvm.iml" filepath="$PROJECT_DIR$/.idea/modules/libsvm/Application.libsvm.iml" />
+    </modules>
+  </component>
+</project>
